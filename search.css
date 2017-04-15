@@ -1,8 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin:400);
 
 .webdesigntuts-workshop {
-	background: #151515;
+	background-image: url("https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg");
+	background-color: #151515;
 	height: 100%;
+	background-size: 2000px 1000px;
 	position: absolute;
 	text-align: center;
 	width: 100%;
