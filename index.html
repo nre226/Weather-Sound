@@ -6,10 +6,22 @@
 </head>
 <body>
 <section class="search_bar">
-	<form action="" method="">		    
-		<input type="search" placeholder="What is your location?">		    	
-		<button>Search</button>
+	<form id="form1" action="" method="">		    
+		<input name="location" type="text" placeholder="What is your location?">		    	
+		<button onclick="outputlocation()">Search</button>
 	</form>
 </section>
+
+<script type="text/javascript">
+
+function outputlocation() {
+	var location, x;
+	x = document.getElementById("form1");
+	location = x.elements["location"].value;
+	document.write(location);
+}
+
+</script>
+
 </body>
 </html>
