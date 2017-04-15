@@ -2,24 +2,51 @@
 <html>
 <head>
   <title>Weather Music</title>
+ 
   <link rel="stylesheet" type="text/css" href="css/search.css" />
 </head>
 <body>
-<section class="search_bar">
+<section class="search_bar">5
 	<form id="form1" action="" method="">		    
 		<input name="location" type="text" placeholder="What is your location?">		    	
 		<button onclick="outputlocation()">Search</button>
 	</form>
 </section>
 
-<script type="text/javascript">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> 
+
+function Get_Weather_City(location){
+var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
+$(function() {
+	//var location = "Lexington";
+	var loc = location + ',us';
+	console.log(loc);
+	$.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + loc + '&APPID=' + APIKEY, function(wd) {
+		console.log("Weather data ,", wd);
+	})
+})
+}
+
+
+$(function() {
+	var zip = "40506";
+	var loc = zip + ',us';
+	console.log(loc);
+	$.getJSON('http://api.openweathermap.org/data/2.5/weather?zip=' + loc + '&APPID=' + APIKEY, function(wd) {
+		console.log("Weather data ,", wd);
+	})
+})
 
 function outputlocation() {
 	var location, x;
 	x = document.getElementById("form1");
 	location = x.elements["location"].value;
+	Get_Weather_City(location);
+	console.log(location);
 	document.write(location);
 }
+
+
 
 </script>
 
