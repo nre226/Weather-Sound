@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin:400);
 
-.webdesigntuts-workshop {
+.search_bar {
 	background-image: url("https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg");
 	background-color: #151515;
 	height: 100%;
@@ -10,8 +10,8 @@
 	width: 100%;
 }
 
-.webdesigntuts-workshop:before,
-.webdesigntuts-workshop:after {
+.search_bar:before,
+.search_bar:after {
 	content: '';
 	display: block;	
 	height: 1px;
@@ -21,19 +21,19 @@
 	width: 800px;
 }
 
-.webdesigntuts-workshop:before {
+.search_bar:before {
 	background: #444;
 	background: linear-gradient(left, #151515, #444, #151515);
 	top: 192px;
 }
 
-.webdesigntuts-workshop:after {
+.search_bar:after {
 	background: #000;
 	background: linear-gradient(left, #151515, #000, #151515);	
 	top: 191px;
 }
 
-.webdesigntuts-workshop form {
+.search_bar form {
 	background: #111;
 	background: linear-gradient(#1b1b1b, #111);
 	border: 1px solid #000;
@@ -47,7 +47,7 @@
 	z-index: 1;
 }
 
-.webdesigntuts-workshop input {
+.search_bar input {
 	background: #222;	
 	background: linear-gradient(#333, #222);	
 	border: 1px solid #444;
@@ -66,19 +66,19 @@
 	width: 200px;
 }
 
-.ie .webdesigntuts-workshop input {
+.ie .search_bar input {
 	line-height: 40px;
 }
 
-.webdesigntuts-workshop input::-webkit-input-placeholder {
+.search_bar input::-webkit-input-placeholder {
    color: #888;
 }
 
-.webdesigntuts-workshop input:-moz-placeholder {
+.search_bar input:-moz-placeholder {
    color: #888;
 }
 
-.webdesigntuts-workshop input:focus {
+.search_bar input:focus {
 	animation: glow 800ms ease-out infinite alternate;
 	background: #222922;
 	background: linear-gradient(#333933, #222922);
@@ -88,15 +88,15 @@
 	outline: none;
 }
 
-.webdesigntuts-workshop input:focus::-webkit-input-placeholder { 
+.search_bar input:focus::-webkit-input-placeholder { 
 	color: #efe;
 }
 
-.webdesigntuts-workshop input:focus:-moz-placeholder {
+.search_bar input:focus:-moz-placeholder {
 	color: #efe;
 }
 
-.webdesigntuts-workshop button {
+.search_bar button {
 	background: #222;
 	background: linear-gradient(#333, #222);
 	box-sizing: content-box;
@@ -119,15 +119,15 @@
 	width: 80px;
 }	
 
-.webdesigntuts-workshop button:hover,
-.webdesigntuts-workshop button:focus {
+.search_bar button:hover,
+.search_bar button:focus {
 	background: #292929;
 	background: linear-gradient(#393939, #292929);
 	color: #5f5;
 	outline: none;
 }
 
-.webdesigntuts-workshop button:active {
+.search_bar button:active {
 	background: #292929;
 	background: linear-gradient(#393939, #292929);
 	box-shadow: 0 1px 0 #000, inset 1px 0 1px #222;
