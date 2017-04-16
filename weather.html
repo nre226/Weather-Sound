@@ -7,6 +7,7 @@
   <link rel="stylesheet" type="text/css" href="pagetwo.css" />
   <link rel="stylesheet" type="text/css" href="p2texts.css" />
   <link rel="stylesheet" type="text/css" href="music.css" />
+  <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -19,16 +20,18 @@
 <p id="temp"> Tempature</p>
 <p id="curW"> Weather</p>
 
+<style>
+    body{
+        background-image: url("http://i.imgur.com/YUfzDYb.gif");
+        background-size: 1500px 900px;
+    }
+</style>
 
 <script type="text/javascript">
 var aarr = window.location.href.split('=');
 //get last value
 var id = aarr[aarr.length -1];
 document.getElementById("city").innerHTML = id;
-
-
-
-
 
 var wd;
 var set_val=0;

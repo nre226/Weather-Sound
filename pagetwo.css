@@ -2,9 +2,20 @@
 @import "compass/css3";
 
 h1 {
-  color: #b0b0b0;
+  color: #ffffff;
   font-family: 'Cardo', serif;
   font-size: 1em;
+  font-weight: normal;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  line-height: 2.2em;
+}
+
+p {
+  color: #ffffff;
+  font-family: 'Cardo', serif;
+  font-size: 3em;
+  text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
   font-weight: normal;
   font-style: italic;
   letter-spacing: 0.1em;
