@@ -20,11 +20,66 @@
   </h3>
 </section>
 <p id="insert"></p>
-<script>
+<script type="text/javascript">
 var aarr = window.location.href.split('=');
 //get last value
 var id = aarr[aarr.length -1];
 document.getElementById("insert").innerHTML = id;
+
+
+
+
+
+var wd;
+
+function printTemp(ftemp){
+	document.write(" stuff "+ ftemp);
+	return ftemp;
+};
+
+function Get_Weather_City(location){
+var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
+
+	//var location = "Lexington";
+	var loc = location + ',us';
+	console.log(loc);
+	$.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + loc + '&APPID=' + APIKEY, function(apiData) {
+		wd=apiData;
+		console.log("Weather data ,", wd.main);
+		
+		var currentLocation = wd.name;
+		var currentTemp = printTemp(wd.main.temp);
+		var currentWeather= wd.weather[0].id;
+		document.write(" currentTemp "+currentTemp);
+		document.write(" id "+currentWeather);
+				
+	})
+
+}
+
+
+function Get_Weather_Zip(zip){
+	//var zip = "40506";
+	var loc = zip + ',us';
+	console.log(loc);
+	$.getJSON('http://api.openweathermap.org/data/2.5/weather?zip=' + loc + '&APPID=' + APIKEY, function(wd) {
+		console.log("Weather data ,", wd);
+	})
+};
+
+function outputlocation() {
+	var location =id;
+
+
+	 Get_Weather_City(location);
+	 
+	console.log(location);
+	document.write(location);
+}
+
+window.onload = outputlocation;
+
+
 
 /*
 if (sunny) {
