@@ -1,5 +1,40 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin:400);
 
+/* Style the buttons that are used to open and close the accordion panel */
+
+button.accordion{
+    height:20px; 
+    width:100px; 
+    margin: -20px -50px; 
+    position:relative;
+    top: 10px;
+    left: 625px;
+}
+
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: center;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+div.panel {
+    padding: 0 18px;
+    background-color: transparent;
+    display: none;
+}
+
 .search_bar {
 	background-image: url("https://static.pexels.com/photos/4827/nature-forest-trees-fog.jpeg");
 	background-color: #151515;
@@ -8,6 +43,15 @@
 	position: absolute;
 	text-align: center;
 	width: 100%;
+}
+
+.search_bar {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 }
 
 .search_bar:before,
