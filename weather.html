@@ -1,46 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Weather Music</title>
-  
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
-  <link rel="stylesheet" type="text/css" href="pagetwo.css" />
-  <link rel="stylesheet" type="text/css" href="music.css" />
+    <title>Weather Music</title>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
+    <link rel="stylesheet" type="text/css" href="pagetwo.css" />
+    <link rel="stylesheet" type="text/css" href="music.css" />
+    <link rel="stylesheet" type="text/css" href="p2text.css" />
+    <link rel="stylesheet" type="text/css" href="reset.css" />
+    <script src="modernizr.js"></script>
 </head>
 
 <body>
-<section class="search_bar">
-  <h1 class="heading heading-correct-pronounciation">
-    The
-  </h1>
-  <h2 class="heading heading-correct-pronounciation">
-    <em>Weather Music</em>
-  </h2>
-  <h3 class="heading heading-correct-pronounciation">
-   Listen to the songs that correspond to the weather!
-  </h3>
+    <section class="search_bar">
+      <h1 class="heading heading-correct-pronounciation">
+        The
+    </h1>
+    <h2 class="heading heading-correct-pronounciation">
+        <em>Weather Music</em>
+    </h2>
+    <h3 class="heading heading-correct-pronounciation">
+       Listen to the songs that correspond to the weather!
+   </h3>
 </section>
 <p id="city"> City</p>
 <p id="temp"> Tempature</p>
 <p id="curW"> Weather</p>
+
+
+<section class="cd-intro">
+    <h1 class="cd-headline letters type">
+        <span>Your current temperature is </span> 
+        <span class="cd-words-wrapper waiting">
+            <b class="is-visible">fahrenheit</b>
+            <b>celsius</b>
+            <b>kelvin</b>
+        </span>
+    </h1>
+</section> <!-- cd-intro -->
+<script src="jquery-2.1.1.js"></script>
+<script src="main.js"></script> <!-- Resource jQuery -->
+
+
+
 <script type="text/javascript">
-var aarr = window.location.href.split('=');
-//get last value
-var id = aarr[aarr.length -1];
-document.getElementById("city").innerHTML = id;
+    var aarr = window.location.href.split('=');
+    var id = aarr[aarr.length -1];
+    document.getElementById("city").innerHTML = id;
 
 
+    var wd;
 
-
-var wd;
-
-function printTemp(ftemp){
+    function printTemp(ftemp){
 	//document.write(" stuff "+ ftemp);
 	return ftemp;
 };
 
 function Get_Weather_City(location){
-var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
+    var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
 
 	//var location = "Lexington";
 	var loc = location + ',us';
@@ -71,9 +88,9 @@ var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
 
 function outputlocation() {
 	var location =id;
-	 Get_Weather_City(location);
-	 
-	console.log(location);
+  Get_Weather_City(location);
+
+  console.log(location);
 }
 
 
@@ -82,24 +99,24 @@ function outputlocation() {
 
 var keys = {
     "C": 16.35,
-        "C#/Db": 17.32,
-        "D": 18.35,
-        "D#/Eb": 19.45,
-        "E": 20.6,
-        "F": 21.83,
-        "F#/Gb": 23.12,
-        "G": 24.5,
-        "G#/Ab": 25.96,
-        "A": 27.5,
-        "A#/Bb": 29.14,
-        "B": 30.87,
+    "C#/Db": 17.32,
+    "D": 18.35,
+    "D#/Eb": 19.45,
+    "E": 20.6,
+    "F": 21.83,
+    "F#/Gb": 23.12,
+    "G": 24.5,
+    "G#/Ab": 25.96,
+    "A": 27.5,
+    "A#/Bb": 29.14,
+    "B": 30.87,
 }
 //this used to work differently. I am lazy.
 var waveforms = {
     "sine": "sine",
-        "square": "square",
-        "sawtooth": "sawtooth",
-        "triangle": "triangle",
+    "square": "square",
+    "sawtooth": "sawtooth",
+    "triangle": "triangle",
 }
 
 //Configurations
@@ -188,10 +205,10 @@ var buildScale = function () {
 //I   V    vi     IV
 //Standard Pop Progression
 chordProg = [
-    [0, 2, 4],
-    [4, 6, 8],
-    [5, 7, 9],
-    [3, 5, 7]
+[0, 2, 4],
+[4, 6, 8],
+[5, 7, 9],
+[3, 5, 7]
 ]
 
 //melody function
@@ -216,24 +233,24 @@ var melodyFun = function () {
 
 
 
-    function createButtons(context) {
-        var buttonDiv = document.createElement("div");
-        buttonDiv.className = "buttonDiv";
-        var begin = document.createElement("input");
-        begin.type = "button";
-        begin.value = "start";
-        begin.onclick = beginFunc;
-        begin.className = "button"
-        buttonDiv.appendChild(begin);
+function createButtons(context) {
+    var buttonDiv = document.createElement("div");
+    buttonDiv.className = "buttonDiv";
+    var begin = document.createElement("input");
+    begin.type = "button";
+    begin.value = "start";
+    begin.onclick = beginFunc;
+    begin.className = "button"
+    buttonDiv.appendChild(begin);
 
-        var end = document.createElement("input");
-        end.type = "button";
-        end.value = "end";
-        end.onclick = endFunc;
-        end.className = "button_end"
-        buttonDiv.appendChild(end);
-        context.appendChild(buttonDiv);
-    }
+    var end = document.createElement("input");
+    end.type = "button";
+    end.value = "end";
+    end.onclick = endFunc;
+    end.className = "button_end"
+    buttonDiv.appendChild(end);
+    context.appendChild(buttonDiv);
+}
 
 window.onload = function () {
 	outputlocation();
@@ -377,25 +394,25 @@ var updateWaveformType = function () {
     melodyType = waveform;
 }
 
-    function checkBpmInput(ob) {
-        var invalidChars = /[^0-9]/gi
-        if (invalidChars.test(ob.value)) {
-            ob.value = ob.value.replace(invalidChars, "");
-        }
-        if (ob.value < 40) {
-            ob.value = 40;
-        } else if (ob.value > 300) {
-            ob.value = 300;
-        }
-
+function checkBpmInput(ob) {
+    var invalidChars = /[^0-9]/gi
+    if (invalidChars.test(ob.value)) {
+        ob.value = ob.value.replace(invalidChars, "");
+    }
+    if (ob.value < 40) {
+        ob.value = 40;
+    } else if (ob.value > 300) {
+        ob.value = 300;
     }
 
-    function restart() {
-        if (isRunning) {
-            endFunc();
-            beginFunc();
-        }
+}
+
+function restart() {
+    if (isRunning) {
+        endFunc();
+        beginFunc();
     }
+}
 
 
 
@@ -437,7 +454,7 @@ if (sunny) {
 </script>
 
 <section class:"">
-Sound Waves
+    Sound Waves
 </section>
 
 
