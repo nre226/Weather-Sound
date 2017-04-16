@@ -24,33 +24,11 @@ body {
 h1 {
   color: #b0b0b0;
   font-family: 'Cardo', serif;
-  font-size: .75em;
+  font-size: 1.5em;
   font-weight: normal;
   font-style: italic;
   letter-spacing: 0.1em;
   line-height: 2.2em;
-  display: absolute; left: 185px;
-}
-
-h2 {
-  color: #b0b0b0;
-  font-family: 'Cardo', serif;
-  font-size: .75em;
-  font-weight: normal;
-  font-style: italic;
-  letter-spacing: 0.1em;
-  line-height: 2.2em;
-}
-
-h3 {
-  color: #b0b0b0;
-  font-family: 'Cardo', serif;
-  font-size: .75em;
-  font-weight: normal;
-  font-style: italic;
-  letter-spacing: 0.1em;
-  line-height: 2.2em;
-  display: absolute; left: 50px;
 }
 
 em {
