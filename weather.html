@@ -19,14 +19,14 @@
    Listen to the songs that correspond to the weather!
   </h3>
 </section>
-
-<body>
-
-<p>Display "Good day!" if the hour is less than 15:00:</p>
-
-<p id="demo">Good Evening!</p>
-
+<p id="insert"></p>
 <script>
+var aarr = window.location.href.split('=');
+//get last value
+var id = aarr[aarr.length -1];
+document.getElementById("insert").innerHTML = id;
+
+/*
 if (sunny) {
     sunng background;
     sunny playlist;
@@ -57,7 +57,7 @@ if (sunny) {
     night playlist;
     city information;
     the temperture;
-}
+} */
 </script>
 
 <section class:"">
