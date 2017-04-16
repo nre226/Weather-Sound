@@ -1,62 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Weather Music</title>
-
-	<script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
-	<!--<link rel="stylesheet" type="text/css" href="pagetwo.css" /> -->
-	<!--<link rel="stylesheet" type="text/css" href="music.css" /> -->
-	<link rel="stylesheet" type="text/css" href="p2text.css" />
-	<link rel="stylesheet" type="text/css" href="reset.css" />
-	<link rel="stylesheet" type="text/css" href="title.css" />
-	<script src="modernizr.js"></script>
+<title>Weather Music</title>
+  
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
+  <link rel="stylesheet" type="text/css" href="pagetwo.css" />
+  <link rel="stylesheet" type="text/css" href="music.css" />
 </head>
 
 <body>
+<section class="search_bar">
   <h1 class="heading heading-correct-pronounciation">
     The
-    <em>Weather Music</em>
-   Listen to the songs that correspond to the weather!
   </h1>
+  <h2 class="heading heading-correct-pronounciation">
+    <em>Weather Music</em>
+  </h2>
+  <h3 class="heading heading-correct-pronounciation">
+   Listen to the songs that correspond to the weather!
+  </h3>
+</section>
+<p id="city"> City</p>
+<p id="temp"> Tempature</p>
+<p id="curW"> Weather</p>
 
 
-	<section class="city_info">
-		<p id="city"> City</p>
-		<p id="curW"> Weather</p>
-		<p id="spot"> </p>
-	</section>
-
-	<section class="cd-intro">
-		<h4 class="cd-headline letters type">
-			<span>Your current temperature is </span> 
-			<span class="cd-words-wrapper waiting">
-				<b class="is-visible">fahrenheit</b>
-				<b>celsius</b>
-				<b>kelvin</b>
-			</span>
-		</h4>
-	</section> <!-- cd-intro -->
-	<script src="jquery-2.1.1.js"></script>
-	<script src="main.js"></script> <!-- Resource jQuery -->
+<script type="text/javascript">
+var aarr = window.location.href.split('=');
+//get last value
+var id = aarr[aarr.length -1];
+document.getElementById("city").innerHTML = id;
 
 
 
-	<script type="text/javascript">
-		var aarr = window.location.href.split('=');
-		var id = aarr[aarr.length -1];
-		document.getElementById("city").innerHTML = id;
 
 
-		var wd;
-		var code;
-
-function convertTemp(temp){
-	ftemp = temp*(9/5)-459.67;
-	return ftemp;
+var wd;
+var set_val=0;
+var bpm_value=100;
+var wave_value=2;
+function convert_f(ftemp){
+	ftemp=(9/5)*(ftemp-273)+32;
+	ftemp=ftemp.toFixed(1);	
+	return ftemp+"F";
 };
 
+
+function get_key(code){
+	if(code >= 800 && code<=802){set_val=9;}
+	else if(code >= 500 && code <=501 ){
+	wave_value=3;
+	set_val=10;}
+	else if(code >= 502 && code <=531 ){
+		bpm_value=70;
+		set_val=1;}
+	else if(code >=600 && code<=611){
+		wave_value=0;
+		bpm_value=60;
+		set_val=5;
+	}
+	else if(code==701 || code==741){
+	wave_value=0;
+	bpm_value=115;
+	set_val=4;}
+	else if(code==731 || code==751 || code==761){
+	wave_value=1;
+	bpm_value=180;
+	set_val=0;}
+	else if(code==803 || code==804){
+	bpm_value=80;
+	wave_value=3;
+	set_val=11;}
+	else if(code==904){
+	wave_value=2;
+	bpm_value=100;
+	set_val=7;}
+	else if(code==903 || code==905 || code==906){
+	wave_value_value=0;
+	bpm_value=90;
+	set_val=8;}
+	else if(code==951 || code==956){
+	wave_value=3;
+	bpm_value=155;
+	set_val=1;}
+	else if((code>=200 && code<=232) || (code==960 || code==962)){
+	wave_value=0;
+	bpm_value=65;
+	set_val=1;}
+	else{
+	set_val=6;
+	bpm_value=100;
+	wave_value=2;
+	}
+	return code;
+}
+
 function Get_Weather_City(location){
-	var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
+var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
 
 	//var location = "Lexington";
 	var loc = location + ',us';
@@ -66,41 +106,15 @@ function Get_Weather_City(location){
 		console.log("Weather data ,", wd.main);
 		
 		var currentLocation = wd.name;
-		var currentTemp = convertTemp(wd.main.temp);
-		var currentCode= wd.weather[0].id;
-		code = currentCode;
+		var currentTemp = convert_f(wd.main.temp);
+		var currentCode= get_key(wd.weather[0].id);
 		var currentWeather= wd.weather[0].description;
 		$('#temp').html(currentTemp);	
 		$('#curW').html(currentWeather);
-		currWeather(code);
-
+		$('#code').html(currentCode);
 	})
 
 }
-
-function currWeather(code){
-	var d = new Date();
-	var hr = d.getHours();
-	console.log(hr);
-	if(code < 550){
-		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A7CQunpJEHecknIyABfS8pP" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
-	}
-	else if(code > 599 && code < 630){
-		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Auniversal.fm%3Aplaylist%3A7iMyUkmPe7epyb8J1mqT9y" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
-	}
-	else if(code == 800){
-		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A103Zi2NG06F9qimASDrszv" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
-	}
-	else if(code>800 && code<805){
-		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A16BpjqQV1Ey0HeDueNDSYz" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
-	}
-	else if(code == 905 || code > 950){
-		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Asolodoloalan%3Aplaylist%3A4Wy97advUlh6i3BUp6sZnk" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
-	}
-	else{
-		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A5FJXhjdILmRA2z5bvz4nzf" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
-	}
-};
 
 
 /*function Get_Weather_Zip(zip){
@@ -114,40 +128,40 @@ function currWeather(code){
 
 function outputlocation() {
 	var location =id;
-	Get_Weather_City(location);
-
-	console.log(location);
+	 Get_Weather_City(location);
+	
 }
-
-
-
-
+window.onload=outputlocation();
 
 var keys = {
-	"C": 16.35,
-	"C#/Db": 17.32,
-	"D": 18.35,
-	"D#/Eb": 19.45,
-	"E": 20.6,
-	"F": 21.83,
-	"F#/Gb": 23.12,
-	"G": 24.5,
-	"G#/Ab": 25.96,
-	"A": 27.5,
-	"A#/Bb": 29.14,
-	"B": 30.87,
+    "C": 16.35,
+        "C#/Db": 17.32,
+        "D": 18.35,
+        "D#/Eb": 19.45,
+        "E": 20.6,
+        "F": 21.83,
+        "F#/Gb": 23.12,
+        "G": 24.5,
+        "G#/Ab": 25.96,
+        "A": 27.5,
+        "A#/Bb": 29.14,
+        "B": 30.87,
 }
+
+
+
 //this used to work differently. I am lazy.
 var waveforms = {
-	"sine": "sine",
-	"square": "square",
-	"sawtooth": "sawtooth",
-	"triangle": "triangle",
+    "sine": "sine",
+        "square": "square",
+        "sawtooth": "sawtooth",
+        "triangle": "triangle",
 }
 
 //Configurations
 var octave = 3;
-var key = keys["A"];
+var key=keys["A"];
+
 var base;
 //used with calculating notes
 var a = Math.pow(2, 1 / 12);
@@ -167,9 +181,9 @@ var isRunning = false;
 
 //All browsers, hooray
 try {
-	context = new AudioContext();
+  context = new AudioContext();
 } catch (err) {
-	context = new webkitAudioContext();
+  context = new webkitAudioContext();
 }
 
 //volume
@@ -182,9 +196,9 @@ melodyGain.gain.value = 0.1;
 
 init = function () {
 
-	updateBase();
-	updateWaveformType();
-	buildScale();
+    updateBase();
+    updateWaveformType();
+    buildScale();
 
     //hook everything up
     chor1 = context.createOscillator();
@@ -215,38 +229,39 @@ init = function () {
 
 // Build scale
 var buildScale = function () {
-	notes = [];
-	var freq = base;
-	var step = 0;
-	for (var i = 0; i < range; i++) {
-		notes[i] = freq
-		step++;
-		if (i % 7 != 2 && i % 7 != 6) {
-			step++;
-		}
-		freq = base * Math.pow(a, step);
-	}
+    notes = [];
+    var freq = base;
+    var step = 0;
+    for (var i = 0; i < range; i++) {
+        notes[i] = freq
+        step++;
+        if (i % 7 != 2 && i % 7 != 6) {
+            step++;
+        }
+        freq = base * Math.pow(a, step);
+    }
 }
+
 
 //I   V    vi     IV
 //Standard Pop Progression
 chordProg = [
-[0, 2, 4],
-[4, 6, 8],
-[5, 7, 9],
-[3, 5, 7]
+    [0, 2, 4],
+    [4, 6, 8],
+    [5, 7, 9],
+    [3, 5, 7]
 ]
 
 //melody function
 var melodyFun = function () {
-	time++;
+    time++;
     //chord progression    
     if (time % (notesPerMeasure * (qtrNote / minNote)) == 0 && time != 0) {
-    	chord++;
-    	chord %= 4
-    	chor1.frequency.value = notes[chordProg[chord][0]];
-    	chor2.frequency.value = notes[chordProg[chord][1]];
-    	chor3.frequency.value = notes[chordProg[chord][2]];
+        chord++;
+        chord %= 4
+        chor1.frequency.value = notes[chordProg[chord][0]];
+        chor2.frequency.value = notes[chordProg[chord][1]];
+        chor3.frequency.value = notes[chordProg[chord][2]];
     }
     //Random note length
     if (time % (Math.floor(Math.random() * (qtrNote / minNote))) == 0) {
@@ -259,37 +274,36 @@ var melodyFun = function () {
 
 
 
-function createButtons(context) {
-	var buttonDiv = document.createElement("div");
-	buttonDiv.className = "buttonDiv";
-	var begin = document.createElement("input");
-	begin.type = "button";
-	begin.value = "start";
-	begin.onclick = beginFunc;
-	begin.className = "button"
-	buttonDiv.appendChild(begin);
+    function createButtons(context) {
+        var buttonDiv = document.createElement("div");
+        buttonDiv.className = "buttonDiv";
+        var begin = document.createElement("input");
+        begin.type = "button";
+        begin.value = "start";
+        begin.onclick = beginFunc;
+        begin.className = "button"
+        buttonDiv.appendChild(begin);
 
-	var end = document.createElement("input");
-	end.type = "button";
-	end.value = "end";
-	end.onclick = endFunc;
-	end.className = "button_end"
-	buttonDiv.appendChild(end);
-	context.appendChild(buttonDiv);
-}
+        var end = document.createElement("input");
+        end.type = "button";
+        end.value = "end";
+        end.onclick = endFunc;
+        end.className = "button_end"
+        buttonDiv.appendChild(end);
+        context.appendChild(buttonDiv);
+    }
 
-window.onload = function () {
-	outputlocation();
-	createButtons(document.body);
-	modifierFunc(document.body);
-}
+
+setTimeout("createButtons(document.body)",1000);	
+setTimeout("modifierFunc(document.body)",1000);
+
 
 var beginFunc = function () {
-	if (!isRunning) {
-		init();
-		chord = 0;
-		step = 0;
-		time = 0;
+    if (!isRunning) {
+        init();
+        chord = 0;
+        step = 0;
+        time = 0;
         //run melody function based on minimum note length
         melodyInt = setInterval(melodyFun, minNote);
         melody.start(0);
@@ -299,44 +313,44 @@ var beginFunc = function () {
 
         isRunning = true;
     } else {
-    	endFunc();
-    	beginFunc();
+        endFunc();
+        beginFunc();
     }
 }
 
 // Click to end the madness
 var endFunc = function () {
-	if (isRunning) {
-		chor1.stop(0);
-		chor2.stop(0);
-		chor3.stop(0);
-		melody.stop(0);
-		clearInterval(melodyInt);
-		isRunning = false;
-	}
+    if (isRunning) {
+        chor1.stop(0);
+        chor2.stop(0);
+        chor3.stop(0);
+        melody.stop(0);
+        clearInterval(melodyInt);
+        isRunning = false;
+    }
 }
 //Enormous function I know, could use refactoring
 //Mostly divs and dropdown menus
 var modifierFunc = function (context) {
-	var ddDiv = document.createElement("div");
-	ddDiv.className = "ddDiv";
+    var ddDiv = document.createElement("div");
+    ddDiv.className = "ddDiv";
     //key selector
     var keydd = document.createElement("select");
     var keyText = document.createTextNode("Key: ");
     keydd.name = "KeySelector";
     keydd.className = "selector";
     for (var key in keys) {
-    	keydd.options[keydd.length] = new Option(key, keys[key]);
+        keydd.options[keydd.length] = new Option(key, keys[key]);
     }
 
     keydd.onchange = function () {
-    	window.key = keydd.value;
-    	restart();
+        window.key = keydd.value;
+        restart();
     }
-    keydd.selectedIndex = 9
+    keydd.selectedIndex = set_val;
 
-    ddDiv.appendChild(keyText);
-    ddDiv.appendChild(keydd);
+    //ddDiv.appendChild(keyText);
+   //ddDiv.appendChild(keydd);
 
     //octave selector
     var octavedd = document.createElement("select");
@@ -344,15 +358,15 @@ var modifierFunc = function (context) {
     octavedd.name = "OctaveSelector";
     octavedd.className = "selector";
     for (var i = 0; i < 6; i++) {
-    	octavedd.options[octavedd.length] = new Option(i, i);
+        octavedd.options[octavedd.length] = new Option(i, i);
     }
     octavedd.onchange = function () {
-    	octave = octavedd.value;
-    	restart();
+        octave = octavedd.value;
+        restart();
     }
     octavedd.selectedIndex = 3
-    ddDiv.appendChild(octaveText);
-    ddDiv.appendChild(octavedd);
+    //ddDiv.appendChild(octaveText);
+    //ddDiv.appendChild(octavedd);
 
     //range selector
     var rangedd = document.createElement("select");
@@ -360,17 +374,17 @@ var modifierFunc = function (context) {
     rangedd.name = "RangeSelector";
     rangedd.className = "selector";
     for (var i = 1; i < 5; i++) {
-    	rangedd.options[rangedd.length] = new Option(i, i);
+        rangedd.options[rangedd.length] = new Option(i, i);
     }
 
     rangedd.onchange = function () {
-    	window.range = rangedd.value * 8;
-    	restart();
+        window.range = rangedd.value * 8;
+        restart();
     }
     rangedd.selectedIndex = 1
 
-    ddDiv.appendChild(rangeText);
-    ddDiv.appendChild(rangedd);
+    //ddDiv.appendChild(rangeText);
+   //ddDiv.appendChild(rangedd);
 
     //waveform selector
     var waveformdd = document.createElement("select");
@@ -378,17 +392,17 @@ var modifierFunc = function (context) {
     waveformdd.name = "WaveformSelector";
     waveformdd.className = "selector";
     for (var waveform in waveforms) {
-    	waveformdd.options[waveformdd.length] = new Option(waveform, waveforms[waveform]);
-    	restart();
+        waveformdd.options[waveformdd.length] = new Option(waveform, waveforms[waveform]);
+        restart();
     }
-
+	
     waveformdd.onchange = function () {
-    	window.waveform = waveformdd.value;
-    	restart();
+        window.waveform = waveformdd.value;
+        restart();
     }
-    waveformdd.selectedIndex = 2
-    ddDiv.appendChild(waveformText);
-    ddDiv.appendChild(waveformdd);
+    waveformdd.selectedIndex = wave_value;
+   // ddDiv.appendChild(waveformText);
+   // ddDiv.appendChild(waveformdd);
 
     //bpm selector
     var bpmdd = document.createElement("input");
@@ -398,55 +412,90 @@ var modifierFunc = function (context) {
     bpmdd.type = "text";
 
     bpmdd.onchange = function () {
-    	checkBpmInput(bpmdd)
-    	window.qtrNote = Math.floor(Math.pow(bpmdd.value / 60 / 1000, -1));
-    	window.eigthNote = window.qtrNote / 2;
-    	window.minNote = window.eigthNote;
-    	restart();
+        checkBpmInput(bpmdd)
+        window.qtrNote = Math.floor(Math.pow(bpmdd.value / 60 / 1000, -1));
+        window.eigthNote = window.qtrNote / 2;
+        window.minNote = window.eigthNote;
+        restart();
     }
-    bpmdd.value = 100
-    ddDiv.appendChild(bpmText);
-    ddDiv.appendChild(bpmdd);
+    bpmdd.value = bpm_value;
+    //ddDiv.appendChild(bpmText);
+    //ddDiv.appendChild(bpmdd);
 
-    context.appendChild(ddDiv);
+    //context.appendChild(ddDiv);
 
 }
 
 var updateBase = function () {
-	base = key * Math.pow(2, octave);
+    base = key * Math.pow(2, octave);
 }
 var updateWaveformType = function () {
-	chordType = waveform;
-	melodyType = waveform;
+    chordType = waveform;
+    melodyType = waveform;
 }
 
-function checkBpmInput(ob) {
-	var invalidChars = /[^0-9]/gi
-	if (invalidChars.test(ob.value)) {
-		ob.value = ob.value.replace(invalidChars, "");
-	}
-	if (ob.value < 40) {
-		ob.value = 40;
-	} else if (ob.value > 300) {
-		ob.value = 300;
-	}
+    function checkBpmInput(ob) {
+        var invalidChars = /[^0-9]/gi
+        if (invalidChars.test(ob.value)) {
+            ob.value = ob.value.replace(invalidChars, "");
+        }
+        if (ob.value < 40) {
+            ob.value = 40;
+        } else if (ob.value > 300) {
+            ob.value = 300;
+        }
 
-}
+    }
 
-function restart() {
-	if (isRunning) {
-		endFunc();
-		beginFunc();
-	}
-}
+    function restart() {
+        if (isRunning) {
+            endFunc();
+            beginFunc();
+        }
+    }
 
 
 
+
+
+
+/*
+if (sunny) {
+    sunng background;
+    sunny playlist;
+    city information;
+    the temperture;
+} else if (windy){
+	windy background;
+    windy playlist;
+    city information;
+    the temperture;
+} else if (cloudy){
+	cloudy background;
+    cloudy playlist;
+    city information;
+    the temperture;
+} else if (rainy){
+	rainy background;
+    rainy playlist;
+    city information;
+    the temperture;
+} else if (snowy){
+	snowy background;
+    snowy playlist;
+    city information;
+    the temperture;
+} else if (night){
+	night background;
+    night playlist;
+    city information;
+    the temperture;
+} */
 </script>
 
-<section class:"">
-	Sound Waves
-</section>
+<!--<section class:"">
+Sound Waves
+</section> -->
 
 
 
