@@ -2,8 +2,9 @@
 <html>
 <head>
   <title>Weather Music</title>
- 
-  <link rel="stylesheet" type="text/css" href="search.css" />
+  
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
+  <link rel="stylesheet" type="text/css" href="css/search.css" />
 </head>
 <body>
 <section class="search_bar">
@@ -13,41 +14,43 @@
 	</form>
 </section>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> 
+<script type="text/javascript">
 
 function Get_Weather_City(location){
 var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
-$(function() {
+
 	//var location = "Lexington";
 	var loc = location + ',us';
 	console.log(loc);
 	$.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + loc + '&APPID=' + APIKEY, function(wd) {
-		console.log("Weather data ,", wd);
+		console.log("Weather data ,", wd.main);
+		var currentLocation = wd.name;
+		var currentTemp = wd.main.temp;
+		document.write(" "+currentTemp);
+
 	})
-})
+
 }
 
-
-$(function() {
-	var zip = "40506";
+function Get_Weather_Zip(zip){
+	//var zip = "40506";
 	var loc = zip + ',us';
 	console.log(loc);
 	$.getJSON('http://api.openweathermap.org/data/2.5/weather?zip=' + loc + '&APPID=' + APIKEY, function(wd) {
 		console.log("Weather data ,", wd);
 	})
-})
+};
 
 function outputlocation() {
 	var location, x;
 	x = document.getElementById("form1");
 	location = x.elements["location"].value;
+
 	Get_Weather_City(location);
+
 	console.log(location);
 	document.write(location);
 }
-
-
-
 </script>
 
 </body>
