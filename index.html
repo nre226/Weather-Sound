@@ -14,13 +14,21 @@
     <em>Weather Music</em>
    Listen to the songs that correspond to the weather!
   </h1>
-	<form id="form1" action="" method="">		    
+	<form id="form1" action="weather.html" method="">		    
 		<input name="location" type="text" placeholder="What is your location?">		    	
-		<button onclick="outputlocation()">Search</button>
+		<button onclick="outputlocation()" >Search</button>
+	
 	</form>
 </section>
 
 <script type="text/javascript">
+
+var wd;
+
+function printTemp(ftemp){
+	document.write(" stuff "+ ftemp);
+	return ftemp;
+};
 
 function Get_Weather_City(location){
 var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
@@ -28,12 +36,16 @@ var APIKEY = "e1260a138991d0c4ae5e9950355c71fc";
 	//var location = "Lexington";
 	var loc = location + ',us';
 	console.log(loc);
-	$.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + loc + '&APPID=' + APIKEY, function(wd) {
+	$.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + loc + '&APPID=' + APIKEY, function(apiData) {
+		wd=apiData;
 		console.log("Weather data ,", wd.main);
+		
 		var currentLocation = wd.name;
-		var currentTemp = wd.main.temp;
-		document.write(" "+currentTemp);
-
+		var currentTemp = printTemp(wd.main.temp);
+		var currentWeather= wd.weather[0].id;
+		document.write(" currentTemp "+currentTemp);
+		document.write(" id "+currentWeather);
+				
 	})
 
 }
@@ -52,8 +64,8 @@ function outputlocation() {
 	x = document.getElementById("form1");
 	location = x.elements["location"].value;
 
-	Get_Weather_City(location);
-
+	 Get_Weather_City(location);
+	 
 	console.log(location);
 	document.write(location);
 }
