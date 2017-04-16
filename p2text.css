@@ -25,7 +25,7 @@ Primary style
 }
 
 .cd-intro {
-  color: #b0b0b0;
+  color: #ffffff;
   font-family: 'Cardo';
   width: 90%;
   max-width: 768px;
@@ -38,11 +38,11 @@ Primary style
   font-size: 48px;
   line-height: 40px;
   letter-spacing: -1px;
-  color: #444;
+  color: #ffffff;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   font-weight: 100;
-  text-align: right;
+  text-align: center;
 }
 @media only screen and (min-width: 768px) {
   .cd-intro {
