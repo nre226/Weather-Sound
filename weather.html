@@ -4,8 +4,8 @@
 	<title>Weather Music</title>
 
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
-	<link rel="stylesheet" type="text/css" href="pagetwo.css" />
-	<link rel="stylesheet" type="text/css" href="music.css" />
+	<!--<link rel="stylesheet" type="text/css" href="pagetwo.css" /> -->
+	<!--<link rel="stylesheet" type="text/css" href="music.css" /> -->
 	<link rel="stylesheet" type="text/css" href="p2text.css" />
 	<link rel="stylesheet" type="text/css" href="reset.css" />
 	<link rel="stylesheet" type="text/css" href="title.css" />
@@ -23,6 +23,7 @@
 	<section class="city_info">
 		<p id="city"> City</p>
 		<p id="curW"> Weather</p>
+		<p id="spot"> </p>
 	</section>
 
 	<section class="cd-intro">
@@ -47,9 +48,10 @@
 
 
 		var wd;
+		var code;
 
-		function printTemp(ftemp){
-	//document.write(" stuff "+ ftemp);
+function convertTemp(temp){
+	ftemp = temp*(9/5)-459.67;
 	return ftemp;
 };
 
@@ -64,14 +66,41 @@ function Get_Weather_City(location){
 		console.log("Weather data ,", wd.main);
 		
 		var currentLocation = wd.name;
-		var currentTemp = printTemp(wd.main.temp);
+		var currentTemp = convertTemp(wd.main.temp);
 		var currentCode= wd.weather[0].id;
+		code = currentCode;
 		var currentWeather= wd.weather[0].description;
 		$('#temp').html(currentTemp);	
 		$('#curW').html(currentWeather);
+		currWeather(code);
+
 	})
 
 }
+
+function currWeather(code){
+	var d = new Date();
+	var hr = d.getHours();
+	console.log(hr);
+	if(code < 550){
+		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A7CQunpJEHecknIyABfS8pP" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
+	}
+	else if(code > 599 && code < 630){
+		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Auniversal.fm%3Aplaylist%3A7iMyUkmPe7epyb8J1mqT9y" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
+	}
+	else if(code == 800){
+		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A103Zi2NG06F9qimASDrszv" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
+	}
+	else if(code>800 && code<805){
+		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A16BpjqQV1Ey0HeDueNDSYz" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
+	}
+	else if(code == 905 || code > 950){
+		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Asolodoloalan%3Aplaylist%3A4Wy97advUlh6i3BUp6sZnk" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
+	}
+	else{
+		document.getElementById('spot').innerHTML = '<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A5FJXhjdILmRA2z5bvz4nzf" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
+	}
+};
 
 
 /*function Get_Weather_Zip(zip){
@@ -413,41 +442,6 @@ function restart() {
 
 
 
-
-
-
-/*
-if (sunny) {
-    sunng background;
-    sunny playlist;
-    city information;
-    the temperture;
-} else if (windy){
-	windy background;
-    windy playlist;
-    city information;
-    the temperture;
-} else if (cloudy){
-	cloudy background;
-    cloudy playlist;
-    city information;
-    the temperture;
-} else if (rainy){
-	rainy background;
-    rainy playlist;
-    city information;
-    the temperture;
-} else if (snowy){
-	snowy background;
-    snowy playlist;
-    city information;
-    the temperture;
-} else if (night){
-	night background;
-    night playlist;
-    city information;
-    the temperture;
-} */
 </script>
 
 <section class:"">
