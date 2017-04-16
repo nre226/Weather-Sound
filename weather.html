@@ -238,12 +238,22 @@ var buildScale = function () {
 }
 
 
+var arr = [];
+var length = 12; // user defined length
+
+for(var i = 0; i < length; i++) {
+	var num=Math.floor(Math.random() * 10);
+    arr.push(num);
+	console.log(num);
+	console.log(" ");
+}
+
 //I   V    vi     IV
 //Standard Pop Progression
 chordProg = [
-    [0, 2, 4],
+    [0, 2, arr[6]],
     [4, 6, 8],
-    [5, 7, 9],
+    [5, arr[2], 9],
     [3, 5, 7]
 ]
 
