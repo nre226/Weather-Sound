@@ -4,7 +4,7 @@
 	<title>Weather Music</title>
 
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
-	<!--<link rel="stylesheet" type="text/css" href="pagetwo.css" /> -->
+	<link rel="stylesheet" type="text/css" href="pagetwo.css" />
 	<!--<link rel="stylesheet" type="text/css" href="music.css" /> -->
 	<link rel="stylesheet" type="text/css" href="p2text.css" />
 	<link rel="stylesheet" type="text/css" href="reset.css" />
@@ -39,7 +39,7 @@
 		<h4 class="cd-headline letters type">
 			<span>Your current temperature is </span> 
 			<span class="cd-words-wrapper waiting">
-				<b class="is-visible">fahrenheit</b>
+				<b class="is-visible" id"T">fahrenheit</b>
 				<b>celsius</b>
 				<b>kelvin</b>
 			</span>
@@ -51,17 +51,23 @@
 
 
 	<script type="text/javascript">
-		var aarr = window.location.href.split('=');
-		var id = aarr[aarr.length -1];
-		document.getElementById("city").innerHTML = id;
+var aarr = window.location.href.split('=');
+var id = aarr[aarr.length -1];
+document.getElementById("city").innerHTML = id;
 
 
-		var wd;
-		var code;
+var wd;
+var code;
 
-function convertTemp(temp){
-	ftemp = temp*(9/5)-459.67;
-	return ftemp;
+function convert_f(ftemp){
+	ftemp=(9/5)*(ftemp-273)+32;
+	ftemp=ftemp.toFixed(1);	
+	return ftemp+"F";
+};
+
+function convert_c(ctemp){
+	ctemp=ctemp-273.15;
+	return ctemp+"C";
 };
 
 function Get_Weather_City(location){
@@ -75,12 +81,14 @@ function Get_Weather_City(location){
 		console.log("Weather data ,", wd.main);
 		
 		var currentLocation = wd.name;
-		var currentTemp = convertTemp(wd.main.temp);
+		var currentTemp = convert_f(wd.main.temp);
+		var currentCel= convert_c(wd.main.temp);
 		var currentCode= wd.weather[0].id;
 		code = currentCode;
 		var currentWeather= wd.weather[0].description;
 		$('#temp').html(currentTemp);	
 		$('#curW').html(currentWeather);
+		$('.is-visible').html(currentTemp);
 		currWeather(code);
 
 	})
@@ -129,7 +137,7 @@ function outputlocation() {
 }
 
 
-/*
+
 
 
 var keys = {
@@ -360,8 +368,8 @@ var modifierFunc = function (context) {
     	restart();
     }
     octavedd.selectedIndex = 3
-    ddDiv.appendChild(octaveText);
-    ddDiv.appendChild(octavedd);
+    //ddDiv.appendChild(octaveText);
+    //ddDiv.appendChild(octavedd);
 
     //range selector
     var rangedd = document.createElement("select");
@@ -378,8 +386,8 @@ var modifierFunc = function (context) {
     }
     rangedd.selectedIndex = 1
 
-    ddDiv.appendChild(rangeText);
-    ddDiv.appendChild(rangedd);
+   // ddDiv.appendChild(rangeText);
+    //ddDiv.appendChild(rangedd);
 
     //waveform selector
     var waveformdd = document.createElement("select");
@@ -396,8 +404,8 @@ var modifierFunc = function (context) {
     	restart();
     }
     waveformdd.selectedIndex = 2
-    ddDiv.appendChild(waveformText);
-    ddDiv.appendChild(waveformdd);
+   // ddDiv.appendChild(waveformText);
+    //ddDiv.appendChild(waveformdd);
 
     //bpm selector
     var bpmdd = document.createElement("input");
@@ -414,8 +422,8 @@ var modifierFunc = function (context) {
     	restart();
     }
     bpmdd.value = 100
-    ddDiv.appendChild(bpmText);
-    ddDiv.appendChild(bpmdd);
+   // ddDiv.appendChild(bpmText);
+    //ddDiv.appendChild(bpmdd);
 
     context.appendChild(ddDiv);
 
